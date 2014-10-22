@@ -17,8 +17,9 @@ def get_customer(client):
 def get_report_query(client, organization_number):
     reportQuery = client.factory.create("ns0:reportQuery")
     #objectRef = client.factory.create("ns0:objectRef")
-    objectRef = organization_number
-    reportQuery.object = objectRef
+    #objectRef = organization_number
+    reportQuery.object = organization_number
+    return reportQuery
 
 
 def get_company_report(organization_number):
