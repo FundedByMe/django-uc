@@ -2,6 +2,70 @@ client.set_options(nosend=True)
 context = client.service.companyReport(companyReport)
 context.envelope
 
+>>> companyReport
+(companyReport){
+   customer =
+      (customer){
+         userId = "KOT92"
+         password = "UC"
+         name = None
+         changePassword = None
+      }
+   repositoryaction =
+      (repositoryaction){
+         value = None
+      }
+   companyReportQuery =
+      (reportQuery){
+         object = "556168-2518"
+         orderedBy = None
+         reference = None
+         override =
+            (override){
+               value = None
+            }
+         creditSeeked = None
+         template =
+            (template){
+               income =
+                  (templateIncome){
+                     _type = ""
+                     _value = ""
+                  }
+               coObject = None
+               coObjectIncome = None
+               templateParams =
+                  (templateParams){
+                     templateparam[] = <empty>
+                  }
+               _id = ""
+            }
+         _xmlReply = ""
+         _htmlReply = ""
+         _reviewReply = ""
+         _pdfReply = ""
+         _extendedDetails = ""
+         _lang = ""
+      }
+   _product = ""
+   _version = ""
+ }
+
+
+>>> context = client.service.companyReport(companyReport)
+DEBUG:suds.transport.http:sending:
+URL: https://www.uc.se/UCSoapWeb/services/ucOrders2
+HEADERS: {'SOAPAction': '"http://www.uc.se/ws/ucOrders/companyReport"', 'Content-Type': 'text/xml; charset=utf-8', 'Content-type': 'text/xml; charset=utf-8', 'Soapaction': '"http://www.uc.se/ws/ucOrders/companyReport"'}
+MESSAGE:
+<?xml version="1.0" encoding="UTF-8"?><SOAP-ENV:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.uc.se/schemas/ucOrderRequest/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><ns0:Body><ns1:companyReport><ns1:customer><ns1:customer><ns1:userId>KOT92</ns1:userId><ns1:password>UC</ns1:password></ns1:customer><ns1:repositoryaction/><ns1:companyReportQuery><ns1:object>556168-2518</ns1:object><ns1:override/></ns1:companyReportQuery></ns1:customer><ns1:companyReportQuery/></ns1:companyReport></ns0:Body></SOAP-ENV:Envelope>
+DEBUG:suds.transport.http:received:
+CODE: 200
+HEADERS: {'x-powered-by': 'Servlet/2.5 JSP/2.1', 'transfer-encoding': 'chunked', 'set-cookie': 'www.uc.se=R3864733674; path=/, FAS_PROD_APPLICATON_7931=R3121271089; path=/', 'connection': 'close', 'date': 'Thu, 23 Oct 2014 15:46:20 GMT', 'content-type': 'text/xml;charset="utf-8"'}
+MESSAGE:
+<?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header><WorkContext xmlns="http://oracle.com/weblogic/soap/workarea/">rO0ABXdLABV3ZWJsb2dpYy5hcHAudWNvcmRlcnMAAADWAAAAI3dlYmxvZ2ljLndvcmthcmVhLlN0cmluZ1dvcmtDb250ZXh0AAU0LjIuMwAA</WorkContext></S:Header><S:Body><ns2:ucReply xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://www.uc.se/schemas/ucOrderReply/" xmlns:ns1="http://www.uc.se/schemas/ucOrderRequest/" xsi:nil="true"/></S:Body></S:Envelope>
+
+
+
 '<?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/"
                    xmlns:ns1="http://www.uc.se/schemas/ucOrderRequest/"
@@ -12,7 +76,7 @@ context.envelope
         <ns1:companyReport>
             <ns1:customer>
                 <ns1:userId>KOT92</ns1:userId>
-                <ns1:password>UT</ns1:password>
+                <ns1:password>UC</ns1:password>
             </ns1:customer>
             <ns1:repositoryaction>
             <ns1:object>556168-2518</ns1:object>

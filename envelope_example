@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ucor="http://www.uc.se/schemas/ucOrderRequest/">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:ucor="http://www.uc.se/schemas/ucOrderRequest/">
    <soapenv:Header/>
    <soapenv:Body>
       <ucor:companyReport ucor:product="410" ucor:version="2.1">
          <ucor:customer>
             <ucor:userId>KOT92</ucor:userId>
-            <ucor:password>UT</ucor:password>
+            <ucor:password>UC</ucor:password>
          </ucor:customer>
          <ucor:companyReportQuery ucor:xmlReply="true" ucor:htmlReply="false" ucor:reviewReply="false" ucor:extendedDetails="false" ucor:lang="eng">
             <ucor:object>556168-2518</ucor:object>
