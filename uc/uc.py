@@ -4,7 +4,10 @@ from suds.client import Client
 
 
 def get_client():
-    return Client("https://www.uc.se/UCSoapWeb/services/ucOrders2?wsdl")
+    url = "https://www.uc.se/UCSoapWeb/services/ucOrders2"
+    client = Client(url + "?wsdl")
+    client.sd[0].service.setlocation(url)
+    return client
 
 
 def get_customer(client):
@@ -30,3 +33,8 @@ def get_company_report(organization_number):
     report_query = get_report_query(client, organization_number)
     return client.service.companyReport(
         customer=customer, companyReportQuery=report_query)
+
+
+def get_credit_rating(organization_number):
+    r = get_company_report(organization_number)
+    return r.ucReport[0].xmlReply.reports[0].report[0].group[3].term[0].value
