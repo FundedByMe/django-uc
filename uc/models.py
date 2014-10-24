@@ -3,7 +3,7 @@ from django.db import models
 from .uc import get_company_risk_report
 
 
-class UCRiskReport(models.Models):
+class UCRiskReport(models.Model):
     rating = models.IntegerField()
     last_updated = models.DateTimeField(auto_now=True)
 
