@@ -1,13 +1,25 @@
 from django.conf import settings
 
 from suds.client import Client
+from suds.plugin import MessagePlugin
 
 
-def get_client():
+def get_client(product_code):
     url = "https://www.uc.se/UCSoapWeb/services/ucOrders2"
-    client = Client(url + "?wsdl")
+    client = Client(url + "?wsdl", plugins=[VersionPlugin(product_code)])
     client.sd[0].service.setlocation(url)
     return client
+
+
+class VersionPlugin(MessagePlugin):
+    def __init__(self, product_code):
+        self.product_code = product_code
+
+    def marshalled(self, context):
+        body = context.envelope.getChild('Body')
+        company_report = body[0]
+        company_report.set('ns1:product', self.product_code)
+        company_report.set('ns1:version', '2.1')
 
 
 def get_customer(client):
@@ -27,14 +39,16 @@ def get_report_query(client, organization_number):
     return reportQuery
 
 
-def get_company_report(organization_number):
-    client = get_client()
+def get_company_report(client, organization_number):
     customer = get_customer(client)
     report_query = get_report_query(client, organization_number)
     return client.service.companyReport(
         customer=customer, companyReportQuery=report_query)
 
 
-def get_credit_rating(organization_number):
-    r = get_company_report(organization_number)
-    return r.ucReport[0].xmlReply.reports[0].report[0].group[3].term[0].value
+def get_company_full_report(organization_number):
+    return get_company_report(get_client("410"), organization_number)
+
+
+def get_company_risk_report(organization_number):
+    return get_company_report(get_client("4"), organization_number)
