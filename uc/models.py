@@ -4,10 +4,10 @@ from .uc import get_company_risk_report
 
 
 class UCRiskReport(models.Model):
-    rating = models.IntegerField()
+    rating = models.DecimalField()
     last_updated = models.DateTimeField(auto_now=True)
 
-    def create(self, organization_number):
+    def create_rating_report(self, organization_number):
         report = get_company_risk_report(organization_number)
         self.rating = report.ucReport[0].xmlReply.reports[0].report[0].\
             group[1].term[0].value
