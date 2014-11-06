@@ -26,7 +26,7 @@ You can use the db-backing via the models. On create, the report will be fetched
 automatically and the rating and the date will be saved to the model.
 
     from uc.models import UCRiskReport
-    UCRiskReport.create("556168-2518")
+    UCRiskReport.create_rating_report("556168-2518")
 
 
 You can also fetch the reports from the API directly without using the models.
