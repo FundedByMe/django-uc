@@ -4,7 +4,7 @@ from .uc import get_company_risk_report
 
 
 class UCRiskReport(models.Model):
-    rating = models.DecimalField()
+    rating = models.DecimalField(decimal_places=4, max_digits=6)
     last_updated = models.DateTimeField(auto_now=True)
 
     def create_rating_report(self, organization_number):
