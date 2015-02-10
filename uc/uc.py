@@ -20,6 +20,7 @@ class VersionPlugin(MessagePlugin):
         company_report = body[0]
         company_report.set('ns1:product', self.product_code)
         company_report.set('ns1:version', '2.1')
+        print(context.envelope.getChild('Body'))
 
 
 def get_customer(client):
