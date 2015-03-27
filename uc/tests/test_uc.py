@@ -26,13 +26,13 @@ request_body = """<ns0:Body>
 
 class UCTests(unittest.TestCase):
 
-    def test_get_company_risk_report(self):
-        with patch('__builtin__.print') as print_mock:
-            with patch("uc.uc.settings") as settings_mock:
-                settings_mock.UC_USER_ID = "KOT92"
-                settings_mock.UC_PASSWORD = "UT"
-                report = get_company_risk_report("5561682518")
-                print_mock.assert_called_once_with(request_body)
-                rating = report.ucReport[0].xmlReply.reports[0].report[0].group[1].term[0].value
-                self.assertIsInstance(float(rating), float)
+    @patch('__builtin__.print')
+    def test_get_company_risk_report(self, print_mock):
+        with patch("uc.uc.settings") as settings_mock:
+            settings_mock.UC_USER_ID = "KOT92"
+            settings_mock.UC_PASSWORD = "UT"
+            report = get_company_risk_report("5561682518")
+            print_mock.assert_called_once_with(request_body)
+            rating = report.ucReport[0].xmlReply.reports[0].report[0].group[1].term[0].value
+            self.assertIsInstance(float(rating), float)
 
