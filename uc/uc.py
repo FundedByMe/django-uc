@@ -1,12 +1,8 @@
-import logging
-
+from __future__ import print_function
 from django.conf import settings
 
 from suds.client import Client
 from suds.plugin import MessagePlugin
-
-
-logger = logging.getLogger(__name__)
 
 
 def get_client(product_code):
@@ -25,7 +21,7 @@ class VersionPlugin(MessagePlugin):
         company_report = body[0]
         company_report.set('ns1:product', self.product_code)
         company_report.set('ns1:version', '2.1')
-        logger.warning(context.envelope.getChild('Body'))
+        print(str(context.envelope.getChild('Body')))
 
 
 def get_customer(client):
