@@ -3,6 +3,7 @@ from django.conf import settings
 
 from suds.client import Client
 from suds.plugin import MessagePlugin
+import sys
 
 
 def get_client(product_code):
@@ -54,3 +55,21 @@ def get_company_full_report(organization_number):
 
 def get_company_risk_report(organization_number):
     return get_company_report(get_client("4"), organization_number)
+
+
+def get_credit_rating_group_term_indices(report):
+    """ Returns a tuple (group, term) where `group` is the index of the
+    Credit Rating info provided in the report and `term` is the index of
+    term containing Risk Rating value
+    """
+    try:
+        # Group W110 = Credit Rating
+        # Term W11001 = Risk Rating
+        for index_, group in enumerate(report.ucReport[0].xmlReply.reports[0].report[0].group):
+            if group._id == "W110":
+                for index__, term in enumerate(report.ucReport[0].xmlReply.reports[0].report[0].group[index_].term):
+                    if term._id == "W11001":
+                        return (index_, index__)
+    except AttributeError:
+        raise Exception(
+            "Provided UC report doesn't include sufficient data to get Group/Term index."), None, sys.exc_info()[2]
