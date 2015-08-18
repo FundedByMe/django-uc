@@ -4,7 +4,9 @@ from ..models import UCRiskReport
 
 
 class UCReportFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = UCRiskReport
+
+    class Meta:
+        model = UCRiskReport
 
     rating = None
     last_updated = None
