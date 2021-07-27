@@ -72,4 +72,4 @@ def get_credit_rating_group_term_indices(report):
                         return (index_, index__)
     except AttributeError:
         raise Exception(
-            "Provided UC report doesn't include sufficient data to get Group/Term index."), None, sys.exc_info()[2]
+            "Provided UC report doesn't include sufficient data to get Group/Term index.")
